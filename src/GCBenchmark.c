@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h> 
+#include <math.h> 
 
 
 #define push(sp, n) (*((sp)++) = (n))
@@ -7,8 +9,9 @@
 #define peek(sp) (*((sp)-1))
 #define stackSize(sp, stack) ((sp)-(stack))
 
-
-const int HEIGHT = 4;
+// ---------- Change height to change the size of the tree
+const int HEIGHT = 26;
+// ---------- 
 const int SIZE_REGION = 200000;
 const int SIZE_PAYLOAD = 4;
 
@@ -119,8 +122,8 @@ int processTree(struct Tree* root) {
 
 
 int main(int argc, char** argv) {
-    int numRegions = HEIGHT/SIZE_REGION + 1;
-
+    int numRegions = (pow(2, HEIGHT) - 1)/SIZE_REGION + 1;
+    printf("# of regions: %d\n", numRegions);
     regions = (struct Tree**)malloc(numRegions * sizeof(struct Tree*));
     for (int i = 0; i < numRegions; ++i) {
         regions[i] = (struct Tree*)malloc(SIZE_REGION * sizeof(struct Tree));
@@ -129,10 +132,17 @@ int main(int argc, char** argv) {
     //regions[0][0] = (struct Tree) { .left = NULL, .right = NULL, .vals = {1, 2, -1, -1} };
 
     printf("Processing tree with Regions...\n");
+    clock_t timeStart = clock();
+
     struct Tree* theTree = createTree();
     int sum = processTree(theTree);
+
+    clock_t timeEnd = clock();
+    
     //int sum = 0;
     printf("The sum is %d\n", sum);
+    double diffTime = (double)(timeEnd - timeStart) / CLOCKS_PER_SEC;
+    printf("Used time: %f s\n", diffTime);
     return 0;
 }
 
