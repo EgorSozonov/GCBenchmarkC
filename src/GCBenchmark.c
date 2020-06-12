@@ -14,7 +14,7 @@ struct Tree {
 
 int main(int argc, char** argv) {
     int numRegions = HEIGHT/SIZE_REGION + 1;
-		printf("numRegions = %d", numRegions);
+    printf("numRegions = %d", numRegions);
 		struct Tree** regions = (struct Tree**)malloc(numRegions * sizeof(Tree*));
 
 
