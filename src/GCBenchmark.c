@@ -135,14 +135,17 @@ int main(int argc, char** argv) {
     clock_t timeStart = clock();
 
     struct Tree* theTree = createTree();
+    clock_t timeAlloc = clock();
     int sum = processTree(theTree);
 
     clock_t timeEnd = clock();
     
     //int sum = 0;
     printf("The sum is %d\n", sum);
+    double diffTimeAlloc = (double)(timeAlloc - timeStart) / CLOCKS_PER_SEC;
     double diffTime = (double)(timeEnd - timeStart) / CLOCKS_PER_SEC;
-    printf("Used time: %f s\n", diffTime);
+    printf("Alloc time: %f s\n", diffTimeAlloc);
+    printf("Total used time: %f s\n", diffTime);
     return 0;
 }
 
