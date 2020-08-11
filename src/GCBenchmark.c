@@ -30,6 +30,9 @@ struct Tree {
 };
 
 
+//--------------------- Create --------------------------
+
+
 struct Tree* allocateNode() {
     if (indFree == SIZE_REGION) {
         ++currRegion;
@@ -40,9 +43,6 @@ struct Tree* allocateNode() {
     region[indFree++] = (struct Tree) { .left = NULL, .right = NULL, .vals = { 1, 2, -1, -1 } };
     return result;
 }
-
-
-//--------------------- Create --------------------------
 
 
 struct Tree* createLeftTree(int height) {
@@ -146,6 +146,7 @@ int main(int argc, char** argv) {
     double diffTime = (double)(timeEnd - timeStart) / CLOCKS_PER_SEC;
     printf("Alloc time: %f s\n", diffTimeAlloc);
     printf("Total used time: %f s\n", diffTime);
+		getchar();
     return 0;
 }
 
